@@ -1,4 +1,4 @@
-#include "catch/catch.hpp"
+#include "catch2/catch.hpp"
 #include "testclientconnector.hpp"
 #include <iostream>
 #include <jsonrpccxx/client.hpp>

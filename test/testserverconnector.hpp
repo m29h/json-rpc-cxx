@@ -1,5 +1,5 @@
 #pragma once
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 #include <jsonrpccxx/server.hpp>
 
 using namespace jsonrpccxx;

@@ -1,5 +1,5 @@
 #pragma once
-#include <catch/catch.hpp>
+#include <catch2/catch.hpp>
 #include <jsonrpccxx/common.hpp>
 #include <jsonrpccxx/client.hpp>
 #include <jsonrpccxx/iclientconnector.hpp>
