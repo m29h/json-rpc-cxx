@@ -27,7 +27,7 @@ add_library(coverage_config INTERFACE)
 string(
   APPEND _warning_opts
   "$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:-O3;-Wall;-Wextra;-std=c++11;>"
-  "$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>>:-Wthread-safety;-Wpedantic;-Weffc++>"
+  "$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>>:-Wthread-safety;-Wpedantic;-Weffc++;>"
   "$<$<CXX_COMPILER_ID:GNU>:-pedantic;-pedantic-errors;>"
   )
 
