@@ -3,7 +3,6 @@ set(CMAKE_CXX_STANDARD 17)
 project(json-rpc-cxx VERSION 0.0.1 LANGUAGES CXX)
 
 option(COMPILE_TESTS "Enable tests" ON)
-option(COMPILE_EXAMPLES "Enable examples" ON)
 option(CODE_COVERAGE "Enable coverage reporting" OFF)
 
 include(GNUInstallDirs)
@@ -13,19 +12,6 @@ FetchContent_Declare(nlohmann_json
 	  GIT_REPOSITORY https://github.com/ArthurSonzogni/nlohmann_json_cmake_fetchcontent
 	  GIT_TAG v3.9.1
 )
-
-FetchContent_Declare(
-  catch
-  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v2.13.0
-)
-
-FetchContent_Declare(
-  cpp-httplib
-  GIT_REPOSITORY https://github.com/yhirose/cpp-httplib.git
-  GIT_TAG        v0.7.5
-)
-
 
 
 add_library(json-rpc-cxx INTERFACE)
@@ -47,6 +33,12 @@ string(
 
 
 if (COMPILE_TESTS)
+	FetchContent_Declare(
+	  catch
+	  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+	  GIT_TAG        v2.13.0
+	)
+
     if (CODE_COVERAGE)
         message("Enabled coverage flags")
         target_compile_options(coverage_config INTERFACE -O0 -g --coverage)
@@ -60,17 +52,3 @@ if (COMPILE_TESTS)
     enable_testing()
     add_test(NAME test COMMAND jsonrpccpp-test)
 endif ()
-
-if (COMPILE_EXAMPLES)
-    find_package(Threads)
-    add_executable(example-warehouse examples/warehouse/main.cpp examples/warehouse/warehouseapp.cpp examples/warehouse/types.h examples/inmemoryconnector.hpp)
-    target_compile_options(example-warehouse PUBLIC "${_warning_opts}")
-    FetchContent_MakeAvailable(cpp-httplib)
-    target_link_libraries(example-warehouse PUBLIC json-rpc-cxx Threads::Threads httplib::httplib)
-    #    target_include_directories(example-warehouse SYSTEM PRIVATE vendor)
-    target_include_directories(example-warehouse PRIVATE examples)
-    add_test(NAME example COMMAND example-warehouse)
-endif ()
-
-
-
